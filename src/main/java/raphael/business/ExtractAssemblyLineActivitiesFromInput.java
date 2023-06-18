@@ -19,7 +19,7 @@ public class ExtractAssemblyLineActivitiesFromInput {
         }
         return extractedActivitiesList;
     }
-    private static AssemblyLineActivity extractActivityFromOneLine(String line){
+    public static AssemblyLineActivity extractActivityFromOneLine(String line){
         int activityDurationInMinutes = 0;
         String activityDescription="";
 
@@ -29,7 +29,7 @@ public class ExtractAssemblyLineActivitiesFromInput {
             activityDescription=line.substring(0,indexOfMaintenance);
         }else {
             activityDurationInMinutes  = Integer.parseInt(RegexExtractor.extractFirstPatternFromText(REGEX_FIND_ONLY_MINUTES, line, 1, "0"));
-            activityDescription = RegexExtractor.extractTextReplacingPattern(REGEX_FIND_ONLY_MINUTES,line ,1,"");
+            activityDescription = RegexExtractor.extractTextReplacingPattern(REGEX_FIND_ONLY_MINUTES,line ,0,"");
         }
         return new AssemblyLineActivity(activityDurationInMinutes,activityDescription);
     }

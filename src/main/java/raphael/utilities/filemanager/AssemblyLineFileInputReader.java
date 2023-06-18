@@ -1,5 +1,7 @@
 package raphael.utilities.filemanager;
 
+import raphael.utilities.logs.Log;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -17,6 +19,7 @@ public class AssemblyLineFileInputReader {
         try {
             return new ArrayList<String>(Files.readAllLines(path));
         } catch (IOException e) {
+            Log.error("Erro ao ler arquivo "+ pathOrigin +".");
             throw new RuntimeException(e);
         }
     }

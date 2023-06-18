@@ -19,7 +19,7 @@ public class RegexExtractor {
         Matcher matcher = pattern.matcher(text);
         if(matcher.find()){
             String fragmentReplaced = matcher.group(group);
-            return text.replaceAll(fragmentReplaced,text);
+            return text.replaceAll(fragmentReplaced,fragmentSubstitute).trim();
         }
         else{
             return text;
