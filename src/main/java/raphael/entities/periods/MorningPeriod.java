@@ -23,6 +23,6 @@ public class MorningPeriod implements PeriodEstimable {
     }
     @Override
     public boolean canActivityBeAdded(int elapsedTimeInMinutes,int activityDuration) {
-        return elapsedTimeInMinutes + activityDuration < MORNING_END_TIME_IN_MINUTES;
+        return elapsedTimeInMinutes + activityDuration <= MORNING_END_TIME_IN_MINUTES;
     }
 }

@@ -13,16 +13,4 @@ public class RegexExtractor {
             return returnIfPatternNotFound;
         }
     }
-
-    public static String extractTextReplacingPattern(String regex, String text, int group, String fragmentSubstitute){
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(text);
-        if(matcher.find()){
-            String fragmentReplaced = matcher.group(group);
-            return text.replaceAll(fragmentReplaced,fragmentSubstitute).trim();
-        }
-        else{
-            return text;
-        }
-    }
 }

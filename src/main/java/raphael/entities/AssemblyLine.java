@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 public class AssemblyLine {
-    public static String FIRST_ASSEMBLY_LINE_NAME = "Linha de montagem 1";
-    public static String SECOND_ASSEMBLY_LINE_NAME = "Linha de montagem 2";
+    public static String FIRST_ASSEMBLY_LINE_NAME = "Assembly Line 1";
+    public static String SECOND_ASSEMBLY_LINE_NAME = "Assembly Line 2";
     private String id;
     private String assemblyLineName;
     private MorningPeriod morningPeriod;

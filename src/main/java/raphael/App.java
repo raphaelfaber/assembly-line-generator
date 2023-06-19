@@ -1,6 +1,7 @@
 package raphael;
 
 import raphael.business.MainProcess;
+import raphael.utilities.logs.AssemblyLineLog;
 
 import java.time.LocalTime;
 
@@ -14,7 +15,9 @@ public class App
     {
         System.out.println( "Program started");
         System.out.println( "Generating output...");
-        MainProcess.run();
+        if(!MainProcess.run()){
+            AssemblyLineLog.error("Houve um erro durante o processamento. Finalizando...");
+        }
 
     }
 }

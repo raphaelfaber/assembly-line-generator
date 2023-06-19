@@ -37,7 +37,7 @@ public class ExtractAssemblyLineActivitiesFromInput {
             activityDescription=line.substring(0,indexOfMaintenance);
         }else {
             activityDurationInMinutes  = Integer.parseInt(RegexExtractor.extractFirstPatternFromText(REGEX_FIND_ONLY_MINUTES, line, 1, "0"));
-            activityDescription = RegexExtractor.extractTextReplacingPattern(REGEX_FIND_ONLY_MINUTES,line ,0,"");
+            activityDescription = line;
         }
         return new AssemblyLineActivity(activityDurationInMinutes,activityDescription);
     }
