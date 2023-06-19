@@ -24,7 +24,7 @@ public class AssemblyLineGenerator {
             assemblyLine.initializeTimeCountInMinutes(MorningPeriod.MORNING_START_TIME_IN_MINUTES);
 
             MorningPeriod morning = AssemblyLineMorningPeriodGenerator.generate(listOfActivitiesSortedByDuration,assemblyLine.getElapsedProductionTimeInMinutes());
-            LunchPeriod lunch = new LunchPeriod();
+            LunchPeriod lunch = AssemblyLineLunchPeriodGenerator.generate(assemblyLine.getElapsedProductionTimeInMinutes());
             assemblyLine.setElapsedProductionTime(AfternoonPeriod.AFTERNOON_START_TIME_IN_MINUTES);
             AfternoonPeriod afternoon = AssemblyLineAfternoonPeriodGenerator.generate(listOfActivitiesSortedByDuration,assemblyLine.getElapsedProductionTimeInMinutes());
 

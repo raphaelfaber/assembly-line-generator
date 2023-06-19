@@ -9,13 +9,12 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 
 public class AssemblyLineFileInputReader {
-    static String pathOrigin = FilesPathConstants.ASSEMBLY_LINE_INPUT_DATA_FILE;
-    public static ArrayList<String> readFile(){
-        ArrayList<String> inputLines = getFileLines();
+    public static String pathOrigin = FilesPathConstants.ASSEMBLY_LINE_INPUT_DATA_FILE;
+    public static ArrayList<String> readFile(Path path){
+        ArrayList<String> inputLines = getFileLines(path);
         return inputLines;
     }
-    private static ArrayList<String> getFileLines(){
-        Path path = Paths.get(pathOrigin);
+    private static ArrayList<String> getFileLines( Path path){
         try {
             return new ArrayList<String>(Files.readAllLines(path));
         } catch (IOException e) {

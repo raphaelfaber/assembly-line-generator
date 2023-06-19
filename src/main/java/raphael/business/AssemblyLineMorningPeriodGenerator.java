@@ -3,6 +3,7 @@ package raphael.business;
 import raphael.entities.activities.AssemblyLineActivity;
 import raphael.entities.activities.IdleTime;
 import raphael.entities.periods.MorningPeriod;
+import raphael.utilities.logs.AssemblyLineLog;
 
 import java.util.ArrayList;
 
@@ -19,9 +20,10 @@ public class AssemblyLineMorningPeriodGenerator {
             }
         }
         if(morning.isOnPeriod(elapsedTimeInMinutes)){
-            // if reach here, it means that there is no combination of activities that exactly fit in the morning
+            // if reach here, it means that there is no combination of activities that exactly fit in the morning, and that is undesirable.
             IdleTime idleTime = new IdleTime(elapsedTimeInMinutes, MorningPeriod.MORNING_END_TIME_IN_MINUTES);
             morning.getActivities().add(idleTime);
+            AssemblyLineLog.warn("There is no combination of activities that exactly fit in the morning.");
         }
         return morning;
     }

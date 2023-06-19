@@ -32,7 +32,8 @@ public class ExtractAssemblyLineActivitiesFromInput {
         Objects.requireNonNull(line);
 
         int indexOfMaintenance = line.toUpperCase().indexOf(PATTERN_FIND_MAINTENANCE);
-        if( indexOfMaintenance != -1){
+        boolean isMaintenance = indexOfMaintenance != -1;
+        if(isMaintenance){
             activityDurationInMinutes= AssemblyLineActivity.ACTIVITY_MAINTENANCE_DURATION_IN_MINUTES;
             activityDescription=line.substring(0,indexOfMaintenance);
         }else {
