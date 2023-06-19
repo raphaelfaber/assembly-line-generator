@@ -7,6 +7,7 @@ import raphael.utilities.timemanager.TimeConversion;
 import java.util.ArrayList;
 
 public class MorningPeriod implements PeriodEstimable {
+    public static final String IDENTIFICATION = "Morning period";
     public static final int MORNING_START_TIME_IN_MINUTES = TimeConversion.convertTimeInMinutes(9,0);
     public static final int MORNING_END_TIME_IN_MINUTES = TimeConversion.convertTimeInMinutes(12,0);
     private ArrayList<ActivityListable> activities = new ArrayList<ActivityListable>();
@@ -24,5 +25,10 @@ public class MorningPeriod implements PeriodEstimable {
     @Override
     public boolean canActivityBeAdded(int elapsedTimeInMinutes,int activityDuration) {
         return elapsedTimeInMinutes + activityDuration <= MORNING_END_TIME_IN_MINUTES;
+    }
+
+    @Override
+    public String getPeriodIdentification() {
+        return IDENTIFICATION;
     }
 }

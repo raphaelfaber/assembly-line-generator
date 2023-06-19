@@ -7,6 +7,7 @@ import raphael.utilities.timemanager.TimeConversion;
 import java.util.ArrayList;
 
 public class LunchPeriod implements ActivityListable, PeriodEstimable {
+    public static final String IDENTIFICATION = "Lunch period";
     public static final int LUNCH_START_TIME_IN_MINUTES = TimeConversion.convertTimeInMinutes(12,0);
     public static final int LUNCH_END_TIME_IN_MINUTES = TimeConversion.convertTimeInMinutes(13,0);
     public static final String LUNCH_ACTIVITY_DESCRIPTION = "Lunch";
@@ -35,6 +36,11 @@ public class LunchPeriod implements ActivityListable, PeriodEstimable {
     @Override
     public boolean canActivityBeAdded(int elapsedTimeInMinutes, int activityDuration) {
         return elapsedTimeInMinutes + getDurationInMinutes() <= LUNCH_END_TIME_IN_MINUTES;
+    }
+
+    @Override
+    public String getPeriodIdentification() {
+        return IDENTIFICATION;
     }
 
     public  ArrayList<ActivityListable> getActivities(){

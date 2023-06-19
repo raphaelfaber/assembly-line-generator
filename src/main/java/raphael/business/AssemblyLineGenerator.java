@@ -5,6 +5,7 @@ import raphael.entities.activities.AssemblyLineActivity;
 import raphael.entities.periods.AfternoonPeriod;
 import raphael.entities.periods.LunchPeriod;
 import raphael.entities.periods.MorningPeriod;
+import raphael.interfaces.PeriodEstimable;
 
 import java.util.ArrayList;
 
@@ -20,26 +21,43 @@ public class AssemblyLineGenerator {
         for(String assemblyLineName : nameOfAssemblyLinesToBeGenerated)
         {
             AssemblyLine assemblyLine = new AssemblyLine(assemblyLineName);
-
             assemblyLine.initializeTimeCountInMinutes(MorningPeriod.MORNING_START_TIME_IN_MINUTES);
-
-            MorningPeriod morning = AssemblyLineMorningPeriodGenerator.generate(listOfActivitiesSortedByDuration,assemblyLine.getElapsedProductionTimeInMinutes());
-            assemblyLine.assignActivitiesToAssemblyLine(morning.getActivities());
-            assemblyLine.countElapsedTime();
-
-            LunchPeriod lunch = AssemblyLineLunchPeriodGenerator.generate(assemblyLine.getElapsedProductionTimeInMinutes());
-            assemblyLine.assignActivitiesToAssemblyLine(lunch.getActivities());
-            assemblyLine.countElapsedTime();
-
-            AfternoonPeriod afternoon = AssemblyLineAfternoonPeriodGenerator.generate(listOfActivitiesSortedByDuration,assemblyLine.getElapsedProductionTimeInMinutes());
-            assemblyLine.assignActivitiesToAssemblyLine(lunch.getActivities());
-            assemblyLine.countElapsedTime();
-
-            assemblyLine.setAfternoonPeriod(afternoon);
-            assemblyLine.setMorningPeriod(morning);
-            assemblyLine.setLunchPeriod(lunch);
-
+            PeriodEstimable period = null;
+            do{
+                period = AssemblyLinePeriodFactory.create(assemblyLine,listOfActivitiesSortedByDuration);
+                if (period == null){
+                    break;
+                }
+                if(MorningPeriod.IDENTIFICATION.equals(period.getPeriodIdentification())){
+                    assemblyLine.setMorningPeriod((MorningPeriod) period);
+                }else if(LunchPeriod.IDENTIFICATION.equals(period.getPeriodIdentification())){
+                    assemblyLine.setLunchPeriod((LunchPeriod) period);
+                }else if(AfternoonPeriod.IDENTIFICATION.equals(period.getPeriodIdentification())){
+                    assemblyLine.setAfternoonPeriod((AfternoonPeriod) period);
+                }
+                assemblyLine.assignActivitiesToAssemblyLine(period.getActivities());
+                assemblyLine.countElapsedTime();
+            }while(period != null);
             assemblyLinesGenerated.add(assemblyLine);
+//            assemblyLine.initializeTimeCountInMinutes(MorningPeriod.MORNING_START_TIME_IN_MINUTES);
+//
+//            MorningPeriod morning = AssemblyLineMorningPeriodGenerator.generate(listOfActivitiesSortedByDuration,assemblyLine.getElapsedProductionTimeInMinutes());
+//            assemblyLine.assignActivitiesToAssemblyLine(morning.getActivities());
+//            assemblyLine.countElapsedTime();
+//
+//            LunchPeriod lunch = AssemblyLineLunchPeriodGenerator.generate(assemblyLine.getElapsedProductionTimeInMinutes());
+//            assemblyLine.assignActivitiesToAssemblyLine(lunch.getActivities());
+//            assemblyLine.countElapsedTime();
+//
+//            AfternoonPeriod afternoon = AssemblyLineAfternoonPeriodGenerator.generate(listOfActivitiesSortedByDuration,assemblyLine.getElapsedProductionTimeInMinutes());
+//            assemblyLine.assignActivitiesToAssemblyLine(lunch.getActivities());
+//            assemblyLine.countElapsedTime();
+//
+//            assemblyLine.setAfternoonPeriod(afternoon);
+//            assemblyLine.setMorningPeriod(morning);
+//            assemblyLine.setLunchPeriod(lunch);
+//
+//            assemblyLinesGenerated.add(assemblyLine);
         }
 
         return assemblyLinesGenerated;
