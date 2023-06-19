@@ -11,7 +11,8 @@ public class AssemblyLineLunchPeriodGenerator{
         LunchPeriod lunch = new LunchPeriod();
         if(!lunch.isOnPeriod(elapsedTimeInMinutes)
                 || !lunch.canActivityBeAdded(elapsedTimeInMinutes,lunch.getDurationInMinutes())){
-            AssemblyLineLog.error("Morning Period got compromised.");
+            AssemblyLineLog.error("Error while generating Lunch Period.");
+            throw new RuntimeException("Morning Period got compromised.");
         }
         return lunch;
     }
