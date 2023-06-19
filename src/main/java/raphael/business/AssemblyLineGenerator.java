@@ -22,12 +22,15 @@ public class AssemblyLineGenerator {
             AssemblyLine assemblyLine = new AssemblyLine(assemblyLineName);
 
             assemblyLine.initializeTimeCountInMinutes(MorningPeriod.MORNING_START_TIME_IN_MINUTES);
+
             MorningPeriod morning = AssemblyLineMorningPeriodGenerator.generate(listOfActivitiesSortedByDuration,assemblyLine.getElapsedProductionTimeInMinutes());
             assemblyLine.assignActivitiesToAssemblyLine(morning.getActivities());
             assemblyLine.countElapsedTime();
+
             LunchPeriod lunch = AssemblyLineLunchPeriodGenerator.generate(assemblyLine.getElapsedProductionTimeInMinutes());
             assemblyLine.assignActivitiesToAssemblyLine(lunch.getActivities());
             assemblyLine.countElapsedTime();
+
             AfternoonPeriod afternoon = AssemblyLineAfternoonPeriodGenerator.generate(listOfActivitiesSortedByDuration,assemblyLine.getElapsedProductionTimeInMinutes());
             assemblyLine.assignActivitiesToAssemblyLine(lunch.getActivities());
             assemblyLine.countElapsedTime();
