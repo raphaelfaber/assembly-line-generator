@@ -39,25 +39,6 @@ public class AssemblyLineGenerator {
                 assemblyLine.countElapsedTime();
             }while(period != null);
             assemblyLinesGenerated.add(assemblyLine);
-//            assemblyLine.initializeTimeCountInMinutes(MorningPeriod.MORNING_START_TIME_IN_MINUTES);
-//
-//            MorningPeriod morning = AssemblyLineMorningPeriodGenerator.generate(listOfActivitiesSortedByDuration,assemblyLine.getElapsedProductionTimeInMinutes());
-//            assemblyLine.assignActivitiesToAssemblyLine(morning.getActivities());
-//            assemblyLine.countElapsedTime();
-//
-//            LunchPeriod lunch = AssemblyLineLunchPeriodGenerator.generate(assemblyLine.getElapsedProductionTimeInMinutes());
-//            assemblyLine.assignActivitiesToAssemblyLine(lunch.getActivities());
-//            assemblyLine.countElapsedTime();
-//
-//            AfternoonPeriod afternoon = AssemblyLineAfternoonPeriodGenerator.generate(listOfActivitiesSortedByDuration,assemblyLine.getElapsedProductionTimeInMinutes());
-//            assemblyLine.assignActivitiesToAssemblyLine(lunch.getActivities());
-//            assemblyLine.countElapsedTime();
-//
-//            assemblyLine.setAfternoonPeriod(afternoon);
-//            assemblyLine.setMorningPeriod(morning);
-//            assemblyLine.setLunchPeriod(lunch);
-//
-//            assemblyLinesGenerated.add(assemblyLine);
         }
 
         return assemblyLinesGenerated;

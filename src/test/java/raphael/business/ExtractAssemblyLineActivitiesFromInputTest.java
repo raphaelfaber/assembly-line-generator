@@ -21,4 +21,22 @@ public class ExtractAssemblyLineActivitiesFromInputTest extends TestCase {
         assertTrue(assertionOne && assertionTwo);
     }
 
+    public void testIfProtectedAgainstIncoherentLines(){
+        String incoherentLineTest[] = {"-----", "daaaa12",null, "blocked aq 12 12 13","end" };
+
+        for(String testedLine:incoherentLineTest) {
+            try {
+                AssemblyLineActivity testedOutput = ExtractAssemblyLineActivitiesFromInput.extractActivityFromOneLine(testedLine);
+            }catch(Exception e){
+                assertNotNull(e);
+                if("end".equals(testedLine)){
+                    break;
+                }else{
+                    continue;
+                }
+            }
+                fail("Incoherent instance produced");
+        }
+    }
+
 }

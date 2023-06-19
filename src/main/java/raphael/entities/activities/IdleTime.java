@@ -3,7 +3,7 @@ package raphael.entities.activities;
 import raphael.interfaces.ActivityListable;
 
 public class IdleTime implements ActivityListable {
-    public static final String IDLE_TIME_DESCRIPTION = "Tempo ocioso";
+    public static final String IDLE_TIME_DESCRIPTION = "Idle time";
     private int durationInMinutes;
     public IdleTime(int elapsedTimeInMinutes, int endOfCurrentPeriodInMinutes){
         durationInMinutes = endOfCurrentPeriodInMinutes - elapsedTimeInMinutes;

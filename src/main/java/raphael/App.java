@@ -18,9 +18,8 @@ public class App
         System.out.println( "Program started");
         System.out.println( "Generating output...");
         Path input = Paths.get(AssemblyLineFileInputReader.pathOrigin);
-        if(!MainProcess.run(input)){
-            AssemblyLineLog.error("Houve um erro durante o processamento. Finalizando...");
-        }
+        String output = MainProcess.run(input);
+        System.out.println(output);
 
     }
 }

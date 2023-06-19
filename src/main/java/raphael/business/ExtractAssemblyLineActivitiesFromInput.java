@@ -40,6 +40,9 @@ public class ExtractAssemblyLineActivitiesFromInput {
             activityDurationInMinutes  = Integer.parseInt(RegexExtractor.extractFirstPatternFromText(REGEX_FIND_ONLY_MINUTES, line, 1, "0"));
             activityDescription = line;
         }
+        if(activityDurationInMinutes == 0){
+            throw new RuntimeException("Error on extracting Activities from Lines");
+        }
         return new AssemblyLineActivity(activityDurationInMinutes,activityDescription);
     }
 }
