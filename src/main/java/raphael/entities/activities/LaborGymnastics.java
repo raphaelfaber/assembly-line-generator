@@ -19,6 +19,6 @@ public class LaborGymnastics implements ActivityListable {
 
     @Override
     public String getDescription() {
-        return null;
+        return LABOR_GYM_DESCRIPTION;
     }
 }

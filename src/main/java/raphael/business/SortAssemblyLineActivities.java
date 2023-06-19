@@ -9,7 +9,7 @@ import java.util.Comparator;
 public class SortAssemblyLineActivities {
     public static ArrayList<AssemblyLineActivity> sortByDescendingDuration(ArrayList<AssemblyLineActivity> unsortedList){
         ArrayList<AssemblyLineActivity> sortedList = new ArrayList<AssemblyLineActivity>(unsortedList);
-        Collections.sort(sortedList, Comparator.comparingInt(AssemblyLineActivity::getDurationInMinutes));
+        Collections.sort(sortedList, Collections.reverseOrder(Comparator.comparingInt(AssemblyLineActivity::getDurationInMinutes)));
         return sortedList;
     }
 }

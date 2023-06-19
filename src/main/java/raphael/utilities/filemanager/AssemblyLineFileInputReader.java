@@ -1,6 +1,6 @@
 package raphael.utilities.filemanager;
 
-import raphael.utilities.logs.Log;
+import raphael.utilities.logs.AssemblyLineLog;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -19,7 +19,7 @@ public class AssemblyLineFileInputReader {
         try {
             return new ArrayList<String>(Files.readAllLines(path));
         } catch (IOException e) {
-            Log.error("Erro ao ler arquivo "+ pathOrigin +".");
+            AssemblyLineLog.error("Erro ao ler arquivo "+ pathOrigin +".");
             throw new RuntimeException(e);
         }
     }

@@ -1,4 +1,5 @@
 Cutting of steel sheets 60min
+
 Austenpera (Heat treatment) 30min
 Tempering sub-zero (Heat treatment) 45min
 Safety sensor assembly 60min

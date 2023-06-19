@@ -14,7 +14,7 @@ public class LunchPeriod implements ActivityListable {
 
     @Override
     public String getDescription() {
-        return null;
+        return LUNCH_ACTIVITY_DESCRIPTION;
     }
 
 }

@@ -45,6 +45,11 @@ public class AssemblyLine {
     private ArrayList<ActivityListable> allActivitiesInOrder;
 
     private int elapsedProductionTimeInMinutes;
+
+    public int getStartProductionTimeInMinutes() {
+        return startProductionTimeInMinutes;
+    }
+
     private int startProductionTimeInMinutes;
     public AssemblyLine(String assemblyLineName){
         this.assemblyLineName = assemblyLineName;

@@ -1,9 +1,11 @@
 package raphael.business;
 
 import raphael.entities.activities.AssemblyLineActivity;
+import raphael.utilities.logs.AssemblyLineLog;
 import raphael.utilities.regex.RegexExtractor;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class ExtractAssemblyLineActivitiesFromInput {
     public static final String REGEX_FIND_ONLY_MINUTES = "(\\d+)min";
@@ -14,6 +16,10 @@ public class ExtractAssemblyLineActivitiesFromInput {
         ArrayList<AssemblyLineActivity> extractedActivitiesList = new ArrayList<AssemblyLineActivity>();
         AssemblyLineActivity oneAssemblyLineActivity;
         for(String line : linesFromInputFile){
+            if("".equals(line.trim())){
+                AssemblyLineLog.warn("Foi ignorado uma linha em branco");
+                continue;
+            }
             oneAssemblyLineActivity = extractActivityFromOneLine(line);
             extractedActivitiesList.add(oneAssemblyLineActivity);
         }
@@ -22,6 +28,8 @@ public class ExtractAssemblyLineActivitiesFromInput {
     public static AssemblyLineActivity extractActivityFromOneLine(String line){
         int activityDurationInMinutes = 0;
         String activityDescription="";
+
+        Objects.requireNonNull(line);
 
         int indexOfMaintenance = line.toUpperCase().indexOf(PATTERN_FIND_MAINTENANCE);
         if( indexOfMaintenance != -1){
