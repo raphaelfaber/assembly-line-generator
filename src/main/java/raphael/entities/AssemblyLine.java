@@ -54,6 +54,7 @@ public class AssemblyLine {
     public AssemblyLine(String assemblyLineName){
         this.assemblyLineName = assemblyLineName;
         this.id = UUID.randomUUID().toString();
+        this.allActivitiesInOrder = new ArrayList<ActivityListable>();
     }
     public int getElapsedProductionTimeInMinutes() {
         return elapsedProductionTimeInMinutes;
@@ -70,5 +71,16 @@ public class AssemblyLine {
         assemblyLinesNames.add(FIRST_ASSEMBLY_LINE_NAME);
         assemblyLinesNames.add(SECOND_ASSEMBLY_LINE_NAME);
         return assemblyLinesNames;
+    }
+
+    public void countElapsedTime(){
+         this.elapsedProductionTimeInMinutes = this.allActivitiesInOrder.stream().mapToInt(ActivityListable::getDurationInMinutes).reduce(this.startProductionTimeInMinutes, Integer::sum);
+    }
+
+    public void assignActivitiesToAssemblyLine( ArrayList<ActivityListable> activitiesAppend ){
+        ArrayList<ActivityListable> combined = new ArrayList<ActivityListable>();
+        combined.addAll(allActivitiesInOrder);
+        combined.addAll(activitiesAppend);
+        allActivitiesInOrder = combined;
     }
 }
