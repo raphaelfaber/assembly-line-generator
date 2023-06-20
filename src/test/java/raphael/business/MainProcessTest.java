@@ -1,12 +1,34 @@
 package raphael.business;
 
 import junit.framework.TestCase;
+import raphael.entities.activities.AssemblyLineActivity;
+import raphael.entities.periods.AfternoonPeriod;
+import raphael.entities.periods.LunchPeriod;
+import raphael.entities.periods.MorningPeriod;
+import raphael.interfaces.ActivityListable;
+import raphael.utilities.filemanager.AssemblyLineFileInputReader;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 
 public class MainProcessTest extends TestCase {
     final Path ASSEMBLY_LINE_TEST_INPUT_DATA_FILE = Paths.get( System.getProperty("user.dir") +"/src/input-test.txt");
+    public void testIfActivitiesTimeInInputFitInAssemblyLines(){
+        int startProduction = MorningPeriod.MORNING_START_TIME_IN_MINUTES;
+        int endProduction = AfternoonPeriod.AFTERNOON_END_TIME_IN_MINUTES;
+        int fullTimeInProduction = (endProduction - startProduction) * 2; //two assembly lines
+
+        Path input = Paths.get(AssemblyLineFileInputReader.pathOrigin);
+        ArrayList<String> linesFromInputFile = AssemblyLineFileInputReader.readFile(input);
+        ArrayList<AssemblyLineActivity> activitiesList = ExtractAssemblyLineActivitiesFromInput.extract(linesFromInputFile);
+        int totalActivityMinutes=0;
+        for(ActivityListable  activityListable: activitiesList){
+            totalActivityMinutes += activityListable.getDurationInMinutes();
+        }
+        totalActivityMinutes += (LunchPeriod.LUNCH_END_TIME_IN_MINUTES-LunchPeriod.LUNCH_START_TIME_IN_MINUTES);
+        assertTrue(totalActivityMinutes<=fullTimeInProduction);
+    }
     public void testIfOutputIsNotNull(){
         String output = MainProcess.run(ASSEMBLY_LINE_TEST_INPUT_DATA_FILE);
         assertNotNull(output);
